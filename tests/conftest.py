@@ -1,4 +1,5 @@
 import os
+from dataclasses import dataclass
 
 import pytest
 from dotenv import load_dotenv
@@ -7,6 +8,10 @@ from services.auth.auth_service import AuthService
 from services.auth.helpers.authorization_helper import AuthorizationHelper
 from services.auth.models.register_request import RegisterRequest
 from services.auth.models.login_request import LoginRequest
+from services.university.helpers.grade_helper import GradeHelper
+from services.university.helpers.group_helper import GroupHelper
+from services.university.helpers.student_helper import StudentHelper
+from services.university.helpers.teacher_helper import TeacherHelper
 from services.university.university_service import UniversityService
 from utils.api_utils import ApiUtils
 from faker import Faker
@@ -26,7 +31,7 @@ def auth_api_helper_unauthorized(auth_api_utils_unauthorized):
     return api_helper
 
 
-@pytest.fixture(scope="session", autouse=False)
+@pytest.fixture(scope="function", autouse=False)
 def auth_api_service_unauthorized(auth_api_utils_unauthorized):
     auth_service = AuthService(api_utils=auth_api_utils_unauthorized)
     return auth_service
@@ -65,7 +70,7 @@ def access_token_new_user(auth_api_service_unauthorized):
     return login_response.access_token
 
 
-@pytest.fixture(scope="session", autouse=False)
+@pytest.fixture(scope="function", autouse=False)
 def access_token_user(auth_api_service_unauthorized):
     load_dotenv()
 
@@ -101,3 +106,51 @@ def register_default_user(auth_api_helper_unauthorized):
             password_repeat=password,
             email=email
         ).model_dump())
+
+
+@pytest.fixture(scope="function", autouse=False)
+def university_service_user(university_api_utils_user):
+    university_service = UniversityService(university_api_utils_user)
+    return university_service
+
+
+@dataclass
+class UniversityHelpers:
+    grade: GradeHelper
+    group: GroupHelper
+    student: StudentHelper
+    teacher: TeacherHelper
+
+
+@pytest.fixture(scope="function", autouse=False)
+def grade_helper_user(university_api_utils_user):
+    helper = GradeHelper(university_api_utils_user)
+    return helper
+
+
+@pytest.fixture(scope="function", autouse=False)
+def group_helper_user(university_api_utils_user):
+    helper = GroupHelper(university_api_utils_user)
+    return helper
+
+
+@pytest.fixture(scope="function", autouse=False)
+def student_helper_user(university_api_utils_user):
+    helper = StudentHelper(university_api_utils_user)
+    return helper
+
+
+@pytest.fixture(scope="function", autouse=False)
+def teacher_helper_user(university_api_utils_user):
+    helper = TeacherHelper(university_api_utils_user)
+    return helper
+
+
+@pytest.fixture(scope="function", autouse=False)
+def university_helper_user(grade_helper_user, group_helper_user, student_helper_user, teacher_helper_user):
+    return UniversityHelpers(
+        grade=grade_helper_user,
+        group=group_helper_user,
+        student=student_helper_user,
+        teacher=teacher_helper_user
+    )

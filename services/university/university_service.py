@@ -13,6 +13,7 @@ from services.university.models.grade_list_response import GradeListResponse
 from services.university.models.grade_request import GradeRequest
 from services.university.models.grade_response import GradeResponse
 from services.university.models.grade_statistic_response import GradeStatisticResponse
+from services.university.models.group_list_response import GroupListResponse
 from services.university.models.group_request import GroupRequest
 from services.university.models.group_response import GroupResponse
 from services.university.models.student_request import StudentRequest
@@ -36,6 +37,12 @@ class UniversityService(BaseService):
         self.teacher_helper = TeacherHelper(self.api_utils)
         self.grade_helper = GradeHelper(self.api_utils)
 
+    """=================     GROUPS     ================="""
+
+    def get_groups(self, ) -> GroupListResponse:
+        response = self.group_helper.get_groups()
+        return GroupListResponse(groups=response.json())
+
     def create_group(self, group_request: GroupRequest) -> GroupResponse:
         response = self.group_helper.post_group(json=group_request.model_dump())
         return GroupResponse(**response.json())
@@ -43,6 +50,8 @@ class UniversityService(BaseService):
     def create_random_group(self):
         response = self.create_group(GroupRequest(name=f"{self.faker.word()}{random.randint(1, 100)}"))
         return response
+
+    """=================     STUDENT     ================="""
 
     def create_student(self, student_request: StudentRequest) -> StudentResponse:
         response = self.student_helper.post_student(json=student_request.model_dump())
@@ -61,6 +70,8 @@ class UniversityService(BaseService):
 
         return response
 
+    """=================     TEACHER     ================="""
+
     def create_teacher(self, teacher_request: TeacherRequest) -> TeacherResponse:
         response = self.teacher_helper.post_teacher(json=teacher_request.model_dump())
         return TeacherResponse(**response.json())
@@ -75,13 +86,15 @@ class UniversityService(BaseService):
 
         return response
 
-    def create_grade(self, grade_request: GradeRequest) -> GradeResponse:
-        response = self.grade_helper.post_grade(data=grade_request.model_dump())
-        return GradeResponse(**response.json())
+    """=================     GRADES     ================="""
 
     def get_grades(self, params: dict = None) -> GradeListResponse:
         response = self.grade_helper.get_grades(params=params)
         return GradeListResponse(grades=response.json())
+
+    def create_grade(self, grade_request: GradeRequest) -> GradeResponse:
+        response = self.grade_helper.post_grade(data=grade_request.model_dump())
+        return GradeResponse(**response.json())
 
     def get_grade_stats(self, params: dict = None) -> GradeStatisticResponse:
         response = self.grade_helper.get_grade_stats(params=params)

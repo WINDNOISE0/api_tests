@@ -1,9 +1,11 @@
-import random
+from random import randint, choice
 
 import pytest
 from faker import Faker
 
+from services.university.models.conflict_response import ConflictResponse
 from services.university.models.grade_request import GradeRequest
+from services.university.models.group_request import GroupRequest
 
 
 class TestBusinessU:
@@ -14,14 +16,16 @@ class TestBusinessU:
         teacher_id = university_service_user.create_random_teacher().id
         student_id = university_service_user.create_random_student(group_id).id
 
-        id_grade = university_service_user.create_grade(
+        grade_response = university_service_user.create_grade(
             GradeRequest(
                 teacher_id=teacher_id,
                 student_id=student_id,
-                grade=random.randint(1, 5)
-            )).id
+                grade=randint(1, 5)
+            ))
 
-        query_param = {"teacher_id": teacher_id, "group_id": group_id, "student_id": student_id}
+        id_grade = grade_response.id
+        query_param = grade_response.model_dump()
+
         grade_list = university_service_user.get_grades(query_param)
 
         assert id_grade in [grade.id for grade in grade_list.grades], \
@@ -35,7 +39,7 @@ class TestBusinessU:
     def test_grade_list_filtered(self, university_service_user, filter_name):
         grade_list = university_service_user.get_grades()
 
-        random_response = random.choice(grade_list.grades)
+        random_response = choice(grade_list.grades)
         expected_param = getattr(random_response, filter_name)
 
         filtered_list = university_service_user.get_grades({filter_name: expected_param})
@@ -57,7 +61,7 @@ class TestBusinessU:
     def test_grade_stats_filtered(self, university_service_user, filter_name):
         grade_list = university_service_user.get_grades()
 
-        random_response = random.choice(grade_list.grades)
+        random_response = choice(grade_list.grades)
         filter_value = getattr(random_response, filter_name)
 
         request_param = {filter_name: filter_value}
@@ -73,3 +77,23 @@ class TestBusinessU:
         assert expected_max_grade == stats_list.max, f"Expected {expected_max_grade}, but got {stats_list.max}"
         assert expected_min_grade == stats_list.min, f"Expected {expected_min_grade}, but got {stats_list.min}"
         assert expected_avg_grade == stats_list.avg, f"Expected {expected_avg_grade}, but got {stats_list.avg}"
+
+    def test_create_group_not_authorized(self):
+        pass
+
+    def test_create_group_forbidden(self):
+        pass
+
+    def test_create_group_conflict(self, university_service_user, university_helper_user):
+        groups_response_list = university_service_user.get_groups()
+        existing_group_name = choice(groups_response_list.groups).name
+
+        json = GroupRequest(name=existing_group_name).model_dump()
+        group_response = university_helper_user.group.post_group(json=json)
+
+        conflict_response = ConflictResponse(**group_response.json())
+        assert conflict_response.detail == "Group is already created"
+
+
+    def test_create_group_validation_error(self):
+        pass
