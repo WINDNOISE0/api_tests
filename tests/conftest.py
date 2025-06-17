@@ -39,12 +39,6 @@ def university_api_utils_user(access_token_user):
 
 
 @pytest.fixture(scope="function", autouse=False)
-def university_service_user(university_api_utils_user):
-    university_service = UniversityService(university_api_utils_user)
-    return university_service
-
-
-@pytest.fixture(scope="function", autouse=False)
 def access_token_new_user(auth_api_service_unauthorized):
     username = faker.username()
     email = faker.email()
