@@ -3,9 +3,16 @@ from random import randint, choice
 import pytest
 from faker import Faker
 
-from services.university.models.conflict_response import ConflictResponse
-from services.university.models.grade_request import GradeRequest
-from services.university.models.group_request import GroupRequest
+from services.university.helpers.group_helper import GroupHelper
+from services.university.models.error.conflict_response import ConflictResponse
+from services.university.models.error.forbidden import Forbidden
+from services.university.models.error.not_authorized import NotAuthorized
+from services.university.models.error.validation_error_list import ValidationErrorList
+from services.university.models.grade.grade_request import GradeRequest
+from services.university.models.group.group_request import GroupRequest
+from services.university.university_service import UniversityService
+from test_data.token_data import TokenData
+from utils.api_utils import ApiUtils
 
 
 class TestBusinessU:
@@ -79,10 +86,27 @@ class TestBusinessU:
         assert expected_avg_grade == stats_list.avg, f"Expected {expected_avg_grade}, but got {stats_list.avg}"
 
     def test_create_group_not_authorized(self):
-        pass
+        api_helper_unauthorized = GroupHelper(ApiUtils(url=UniversityService.SERVICE_URL))
+        json = GroupRequest(name=f"{self.faker.word()}{randint(1, 100)}").model_dump()
+
+        group_response = api_helper_unauthorized.post_group(json=json)
+
+        no_authorized_response = NotAuthorized(**group_response.json())
+        assert "Invalid login credentials" == no_authorized_response.detail, f"Expected error text: 'Invalid login credentials', but got {no_authorized_response.detail}"
 
     def test_create_group_forbidden(self):
-        pass
+        api_helper_unauthorized = GroupHelper(
+            ApiUtils(
+                url=UniversityService.SERVICE_URL,
+                headers={f"Authorization": f"Bearer {TokenData.INVALID_TOKEN}"}
+            ))
+
+        json = GroupRequest(name=f"{self.faker.word()}{randint(1, 100)}").model_dump()
+
+        group_response = api_helper_unauthorized.post_group(json=json)
+        forbidden_response = Forbidden(**group_response.json())
+
+        assert "Access denied" == forbidden_response.detail, f"Expected error text: 'Access denied', but got {forbidden_response.detail}"
 
     def test_create_group_conflict(self, university_service_user, university_helper_user):
         groups_response_list = university_service_user.get_groups()
@@ -92,8 +116,18 @@ class TestBusinessU:
         group_response = university_helper_user.group.post_group(json=json)
 
         conflict_response = ConflictResponse(**group_response.json())
-        assert conflict_response.detail == "Group is already created"
+        assert "Group is already created" == conflict_response.detail, f"Expected error text: 'Group is already created', but got {conflict_response.detail}"
 
+    @pytest.mark.parametrize("value", [
+        12342,
+        True,
+        None
+    ])
+    def test_create_group_validation_error(self, value, university_helper_user):
+        json = {"name": value}
 
-    def test_create_group_validation_error(self):
-        pass
+        group_response = university_helper_user.group.post_group(json=json)
+
+        validation_error_response = ValidationErrorList(**group_response.json())
+
+        assert validation_error_response.detail, "detail field should not be empty"

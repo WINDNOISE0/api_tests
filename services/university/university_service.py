@@ -7,19 +7,19 @@ from services.university.helpers.grade_helper import GradeHelper
 from services.university.helpers.group_helper import GroupHelper
 from services.university.helpers.student_helper import StudentHelper
 from services.university.helpers.teacher_helper import TeacherHelper
-from services.university.models.base_student import DegreeEnumStr
-from services.university.models.base_teacher import SubjectEnumStr
-from services.university.models.grade_list_response import GradeListResponse
-from services.university.models.grade_request import GradeRequest
-from services.university.models.grade_response import GradeResponse
-from services.university.models.grade_statistic_response import GradeStatisticResponse
-from services.university.models.group_list_response import GroupListResponse
-from services.university.models.group_request import GroupRequest
-from services.university.models.group_response import GroupResponse
-from services.university.models.student_request import StudentRequest
-from services.university.models.student_response import StudentResponse
-from services.university.models.teacher_request import TeacherRequest
-from services.university.models.teacher_response import TeacherResponse
+from services.university.models.student.base_student import DegreeEnumStr
+from services.university.models.teacher.base_teacher import SubjectEnumStr
+from services.university.models.grade.grade_list_response import GradeListResponse
+from services.university.models.grade.grade_request import GradeRequest
+from services.university.models.grade.grade_response import GradeResponse
+from services.university.models.grade.grade_statistic_response import GradeStatisticResponse
+from services.university.models.group.group_list_response import GroupListResponse
+from services.university.models.group.group_request import GroupRequest
+from services.university.models.group.group_response import GroupResponse
+from services.university.models.student.student_request import StudentRequest
+from services.university.models.student.student_response import StudentResponse
+from services.university.models.teacher.teacher_request import TeacherRequest
+from services.university.models.teacher.teacher_response import TeacherResponse
 
 from utils.api_utils import ApiUtils
 

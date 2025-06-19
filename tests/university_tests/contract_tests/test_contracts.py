@@ -4,13 +4,14 @@ import pytest
 from faker import Faker
 
 from services.university.helpers.group_helper import GroupHelper
-from services.university.models.base_student import DegreeEnumStr
-from services.university.models.base_teacher import SubjectEnumStr
-from services.university.models.grade_request import GradeRequest
-from services.university.models.group_request import GroupRequest
-from services.university.models.student_request import StudentRequest
-from services.university.models.teacher_request import TeacherRequest
+from services.university.models.student.base_student import DegreeEnumStr
+from services.university.models.teacher.base_teacher import SubjectEnumStr
+from services.university.models.grade.grade_request import GradeRequest
+from services.university.models.group.group_request import GroupRequest
+from services.university.models.student.student_request import StudentRequest
+from services.university.models.teacher.teacher_request import TeacherRequest
 from services.university.university_service import UniversityService
+from test_data.token_data import TokenData
 from utils.api_utils import ApiUtils
 
 
@@ -93,9 +94,12 @@ class TestContracts:
         assert 403 == group_response.status_code, f"Expected status code:{403}, but got {group_response.status_code}"
 
     def test_group_create_401(self):
-        invalid_token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiQWxleFRlc3QiLCJleHAiOjE3NTAxOTgyNzIsImlhdCI6MTc1MDE5MTA3Mn0.HtF7wLoMhE84p8o2wtoRyzsYeXNUy5MCWRXQr3SYxkzLdkqKtYCM0-ooA6By4HFESGcLpqTCKoBJI27XBhZtk0NIwawprkDjWaEgdNao6fiWc-eIF9gmqOI1WhloXrvesLQsPKGvrWLzTjLjW-0patzLAF1JCLKcjMjfiPMm9fldcLtsjlLxTOGXSZbKUVyRlyTZBFg501p83K3DDik3agycXyiSMnNxcI9ETbooPR2nOMbVjlqLha9YlwQALw1Wi_1RGN0gYMoSXDdTKSVTiTA5JzuljsD7XYR-EPIP6prg6wUA7kfs0_8SeFmI4UvjmeHP_oLezWw-2FwnmQ4UNw"
         api_helper_unauthorized = GroupHelper(
-            ApiUtils(url=UniversityService.SERVICE_URL, headers={f"Authorization": f"Bearer {invalid_token}"}))
+            ApiUtils(
+                url=UniversityService.SERVICE_URL,
+                headers={f"Authorization": f"Bearer {TokenData.INVALID_TOKEN}"}
+            ))
+
         json = GroupRequest(name=f"{self.faker.word()}{randint(1, 100)}").model_dump()
 
         group_response = api_helper_unauthorized.post_group(json=json)

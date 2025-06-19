@@ -5,7 +5,7 @@ from services.auth.models.login_request import LoginRequest
 from services.auth.models.login_response import LoginResponse
 from services.base_service import BaseService
 
-from services.university.models.success_response import SuccessResponse
+from services.university.models.success.success_response import SuccessResponse
 from utils.api_utils import ApiUtils
 
 
