@@ -86,29 +86,6 @@ def access_token_user(auth_api_service_unauthorized):
     return login_response.access_token
 
 
-# @pytest.fixture(scope="session", autouse=True)
-# def register_default_user(auth_api_helper_unauthorized):
-#     load_dotenv()
-#
-#     username = os.getenv("API_USERNAME")
-#     password = os.getenv("API_PASSWORD")
-#
-#     login_response = auth_api_helper_unauthorized.post_login(data=LoginRequest(
-#         username=username,
-#         password=password
-#     ).model_dump())
-#
-#     if login_response.status_code == 401:
-#         email = os.getenv("EMAIL")
-#
-#         auth_api_helper_unauthorized.post_register(RegisterRequest(
-#             username=username,
-#             password=password,
-#             password_repeat=password,
-#             email=email
-#         ).model_dump())
-
-
 @pytest.fixture(scope="function", autouse=False)
 def university_service_user(university_api_utils_user):
     university_service = UniversityService(university_api_utils_user)

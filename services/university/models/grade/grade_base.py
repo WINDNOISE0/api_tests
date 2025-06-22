@@ -1,5 +1,8 @@
 from pydantic import BaseModel, field_validator
 
+MIN_GRADE = 1
+MAX_GRADE = 5
+
 
 class GradeBase(BaseModel):
     teacher_id: int
@@ -8,6 +11,6 @@ class GradeBase(BaseModel):
 
     @field_validator("grade")
     def validate_grade_range(cls, value):
-        if value not in range(1, 6):
-            raise ValueError("Grade must be in range [1-2-3-4-5].")
+        if value not in range(MIN_GRADE, MAX_GRADE + 1):
+            raise ValueError(f"Grade must be in range {MIN_GRADE}-{MAX_GRADE}.")
         return value

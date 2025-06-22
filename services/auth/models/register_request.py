@@ -3,6 +3,9 @@ import re
 from pydantic import BaseModel, ConfigDict, EmailStr, field_validator
 
 
+MIN_LEN_PASSWORD = 8
+MAX_LEN_PASSWORD = 100
+
 class RegisterRequest(BaseModel):
     model_config = ConfigDict(extra="forbid") # запрещаем использовать лишние поля
 
@@ -13,9 +16,9 @@ class RegisterRequest(BaseModel):
 
     @field_validator("password")
     def validate_password_strength(cls, value):
-        if len(value) < 8:
+        if len(value) < MIN_LEN_PASSWORD:
             raise ValueError("Password must be longer than 7 characters.")
-        if len(value) > 100:
+        if len(value) > MAX_LEN_PASSWORD:
             raise ValueError("Password must be shorter than 100 characters.")
         if not re.search(r"[!\"#$%&'()*+,\-./:;<=>?@\[\\\]^_`{|}~]", value):
             raise ValueError("Password must contain at least one special character.")

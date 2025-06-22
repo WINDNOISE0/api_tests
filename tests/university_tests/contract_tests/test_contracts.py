@@ -4,6 +4,7 @@ import pytest
 from faker import Faker
 
 from services.university.helpers.group_helper import GroupHelper
+from services.university.models.grade.grade_base import MIN_GRADE, MAX_GRADE
 from services.university.models.student.base_student import DegreeEnumStr
 from services.university.models.teacher.base_teacher import SubjectEnumStr
 from services.university.models.grade.grade_request import GradeRequest
@@ -17,8 +18,6 @@ from utils.api_utils import ApiUtils
 
 class TestContracts:
     faker = Faker()
-    MIN_GRADE = 1
-    MAX_GRADE = 5
     RANDOM_NAME = f"{faker.word()}{randint(1, 100)}"
 
     def test_group_create_201(self, group_helper_user):
@@ -60,7 +59,7 @@ class TestContracts:
         data = GradeRequest(
             teacher_id=teacher_id,
             student_id=student_id,
-            grade=randint(self.MIN_GRADE, self.MAX_GRADE)
+            grade=randint(MIN_GRADE, MAX_GRADE)
         ).model_dump()
 
         grade_response = grade_helper_user.post_grade(data=data)
