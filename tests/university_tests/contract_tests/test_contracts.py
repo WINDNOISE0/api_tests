@@ -17,24 +17,27 @@ from utils.api_utils import ApiUtils
 
 class TestContracts:
     faker = Faker()
+    MIN_GRADE = 1
+    MAX_GRADE = 5
+    RANDOM_NAME = f"{faker.word()}{randint(1, 100)}"
 
-    def test_group_create_201(self, university_helper_user):
-        json = GroupRequest(name=f"{self.faker.word()}{randint(1, 100)}").model_dump()
-        group_response = university_helper_user.group.post_group(json=json)
+    def test_group_create_201(self, group_helper_user):
+        json = GroupRequest(name=self.RANDOM_NAME).model_dump()
+        group_response = group_helper_user.post_group(json=json)
 
         assert 201 == group_response.status_code, f"Expected status code:{201}, but got {group_response.status_code}"
 
-    def test_teacher_create_201(self, university_helper_user):
+    def test_teacher_create_201(self, teacher_helper_user):
         json = TeacherRequest(
             first_name=self.faker.first_name(),
             last_name=self.faker.last_name(),
             subject=choice(list(SubjectEnumStr))
         ).model_dump()
 
-        teacher_response = university_helper_user.teacher.post_teacher(json=json)
+        teacher_response = teacher_helper_user.post_teacher(json=json)
         assert 201 == teacher_response.status_code, f"Expected status code:{201}, but got {teacher_response.status_code}"
 
-    def test_student_create_201(self, university_helper_user, university_service_user):
+    def test_student_create_201(self, student_helper_user, university_service_user):
         group_id = university_service_user.create_random_group().id
 
         json = StudentRequest(
@@ -46,10 +49,10 @@ class TestContracts:
             group_id=group_id
         ).model_dump()
 
-        student_response = university_helper_user.student.post_student(json=json)
+        student_response = student_helper_user.post_student(json=json)
         assert 201 == student_response.status_code, f"Expected status code:{201}, but got {student_response.status_code}"
 
-    def test_grades_create_201(self, university_helper_user, university_service_user):
+    def test_grades_create_201(self, grade_helper_user, university_service_user):
         group_id = university_service_user.create_random_group().id
         teacher_id = university_service_user.create_random_teacher().id
         student_id = university_service_user.create_random_student(group_id).id
@@ -57,19 +60,19 @@ class TestContracts:
         data = GradeRequest(
             teacher_id=teacher_id,
             student_id=student_id,
-            grade=randint(1, 5)
+            grade=randint(self.MIN_GRADE, self.MAX_GRADE)
         ).model_dump()
 
-        grade_response = university_helper_user.grade.post_grade(data=data)
+        grade_response = grade_helper_user.post_grade(data=data)
 
         assert 201 == grade_response.status_code, f"Expected status code:{201}, but got {grade_response.status_code}"
 
-    def test_group_create_409(self, university_helper_user, university_service_user):
+    def test_group_create_409(self, group_helper_user, university_service_user):
         groups_response_list = university_service_user.get_groups()
         existing_group_name = choice(groups_response_list.groups).name
 
         json = GroupRequest(name=existing_group_name).model_dump()
-        group_response = university_helper_user.group.post_group(json=json)
+        group_response = group_helper_user.post_group(json=json)
 
         assert 409 == group_response.status_code, f"Expected status code:{409}, but got {group_response.status_code}"
 
@@ -78,16 +81,16 @@ class TestContracts:
         True,
         None
     ])
-    def test_group_create_422(self, value, university_helper_user):
+    def test_group_create_422(self, value, group_helper_user):
         json = {"name": value}
 
-        group_response = university_helper_user.group.post_group(json=json)
+        group_response = group_helper_user.post_group(json=json)
 
         assert 422 == group_response.status_code, f"Expected status code:{422}, but got {group_response.status_code}"
 
     def test_group_create_403(self, auth_api_utils_unauthorized):
         api_helper_unauthorized = GroupHelper(ApiUtils(url=UniversityService.SERVICE_URL))
-        json = GroupRequest(name=f"{self.faker.word()}{randint(1, 100)}").model_dump()
+        json = GroupRequest(name=self.RANDOM_NAME).model_dump()
 
         group_response = api_helper_unauthorized.post_group(json=json)
 
@@ -100,7 +103,7 @@ class TestContracts:
                 headers={f"Authorization": f"Bearer {TokenData.INVALID_TOKEN}"}
             ))
 
-        json = GroupRequest(name=f"{self.faker.word()}{randint(1, 100)}").model_dump()
+        json = GroupRequest(name=self.RANDOM_NAME).model_dump()
 
         group_response = api_helper_unauthorized.post_group(json=json)
 

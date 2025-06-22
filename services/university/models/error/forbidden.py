@@ -4,4 +4,4 @@ from pydantic import BaseModel
 
 
 class Forbidden(BaseModel):
-    detail: Literal["Access denied"]
+    detail: Literal["Invalid JWT token"]

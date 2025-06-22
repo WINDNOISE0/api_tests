@@ -1,5 +1,4 @@
 import os
-from dataclasses import dataclass
 
 import pytest
 from dotenv import load_dotenv
@@ -13,6 +12,7 @@ from services.university.helpers.group_helper import GroupHelper
 from services.university.helpers.student_helper import StudentHelper
 from services.university.helpers.teacher_helper import TeacherHelper
 from services.university.university_service import UniversityService
+from test_data.token_data import TokenData
 from utils.api_utils import ApiUtils
 from faker import Faker
 
@@ -38,14 +38,15 @@ def auth_api_service_unauthorized(auth_api_utils_unauthorized):
 
 
 @pytest.fixture(scope="function", autouse=False)
-def university_api_utils_user(access_token_user):
-    api_utils = ApiUtils(url=UniversityService.SERVICE_URL, headers={f"Authorization": f"Bearer {access_token_user}"})
+def university_api_utils_user(access_token_new_user):
+    api_utils = ApiUtils(url=UniversityService.SERVICE_URL,
+                         headers={f"Authorization": f"Bearer {access_token_new_user}"})
     return api_utils
 
 
 @pytest.fixture(scope="function", autouse=False)
 def access_token_new_user(auth_api_service_unauthorized):
-    username = faker.username()
+    username = faker.user_name()
     email = faker.email()
     password = faker.password(
         length=30,
@@ -85,41 +86,33 @@ def access_token_user(auth_api_service_unauthorized):
     return login_response.access_token
 
 
-@pytest.fixture(scope="session", autouse=True)
-def register_default_user(auth_api_helper_unauthorized):
-    load_dotenv()
-
-    username = os.getenv("API_USERNAME")
-    password = os.getenv("API_PASSWORD")
-
-    login_response = auth_api_helper_unauthorized.post_login(data=LoginRequest(
-        username=username,
-        password=password
-    ).model_dump())
-
-    if login_response.status_code == 401:
-        email = os.getenv("EMAIL")
-
-        auth_api_helper_unauthorized.post_register(RegisterRequest(
-            username=username,
-            password=password,
-            password_repeat=password,
-            email=email
-        ).model_dump())
+# @pytest.fixture(scope="session", autouse=True)
+# def register_default_user(auth_api_helper_unauthorized):
+#     load_dotenv()
+#
+#     username = os.getenv("API_USERNAME")
+#     password = os.getenv("API_PASSWORD")
+#
+#     login_response = auth_api_helper_unauthorized.post_login(data=LoginRequest(
+#         username=username,
+#         password=password
+#     ).model_dump())
+#
+#     if login_response.status_code == 401:
+#         email = os.getenv("EMAIL")
+#
+#         auth_api_helper_unauthorized.post_register(RegisterRequest(
+#             username=username,
+#             password=password,
+#             password_repeat=password,
+#             email=email
+#         ).model_dump())
 
 
 @pytest.fixture(scope="function", autouse=False)
 def university_service_user(university_api_utils_user):
     university_service = UniversityService(university_api_utils_user)
     return university_service
-
-
-@dataclass
-class UniversityHelpers:
-    grade: GradeHelper
-    group: GroupHelper
-    student: StudentHelper
-    teacher: TeacherHelper
 
 
 @pytest.fixture(scope="function", autouse=False)
@@ -147,10 +140,10 @@ def teacher_helper_user(university_api_utils_user):
 
 
 @pytest.fixture(scope="function", autouse=False)
-def university_helper_user(grade_helper_user, group_helper_user, student_helper_user, teacher_helper_user):
-    return UniversityHelpers(
-        grade=grade_helper_user,
-        group=group_helper_user,
-        student=student_helper_user,
-        teacher=teacher_helper_user
-    )
+def api_helper_unauthorized_invalid():
+    helper = GroupHelper(
+        ApiUtils(
+            url=UniversityService.SERVICE_URL,
+            headers={f"Authorization": f"Bearer {TokenData.INVALID_TOKEN}"}
+        ))
+    return helper

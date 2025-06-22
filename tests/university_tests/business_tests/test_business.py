@@ -11,12 +11,14 @@ from services.university.models.error.validation_error_list import ValidationErr
 from services.university.models.grade.grade_request import GradeRequest
 from services.university.models.group.group_request import GroupRequest
 from services.university.university_service import UniversityService
-from test_data.token_data import TokenData
 from utils.api_utils import ApiUtils
 
 
 class TestBusinessU:
     faker = Faker()
+    MIN_GRADE = 1
+    MAX_GRADE = 5
+    RANDOM_NAME = f"{faker.word()}{randint(1, 100)}"
 
     def test_create_grade(self, university_service_user):
         group_id = university_service_user.create_random_group().id
@@ -27,7 +29,7 @@ class TestBusinessU:
             GradeRequest(
                 teacher_id=teacher_id,
                 student_id=student_id,
-                grade=randint(1, 5)
+                grade=randint(self.MIN_GRADE, self.MAX_GRADE)
             ))
 
         id_grade = grade_response.id
@@ -41,7 +43,6 @@ class TestBusinessU:
     @pytest.mark.parametrize("filter_name", [
         "teacher_id",
         "student_id"
-        # "group_id" у бэека нет такого параметра в ответе
     ])
     def test_grade_list_filtered(self, university_service_user, filter_name):
         grade_list = university_service_user.get_grades()
@@ -65,7 +66,7 @@ class TestBusinessU:
         "student_id"
         # "group_id" у бэка нет такого параметра в ответе
     ])
-    def test_grade_stats_filtered(self, university_service_user, filter_name):
+    def test_filtered_grade_count(self, university_service_user, filter_name):
         grade_list = university_service_user.get_grades()
 
         random_response = choice(grade_list.grades)
@@ -74,39 +75,77 @@ class TestBusinessU:
         request_param = {filter_name: filter_value}
 
         expected_count_grades = university_service_user.get_count_grade(request_param)
-        expected_max_grade = university_service_user.get_max_grade(request_param)
-        expected_min_grade = university_service_user.get_min_grade(request_param)
-        expected_avg_grade = university_service_user.get_avg_grade(request_param)
-
         stats_list = university_service_user.get_grade_stats(request_param)
 
         assert expected_count_grades == stats_list.count, f"Expected {expected_count_grades}, but got {stats_list.count}"
+
+    @pytest.mark.parametrize("filter_name", [
+        "teacher_id",
+    ])
+    def test_filtered_grade_max(self, university_service_user, filter_name):
+        grade_list = university_service_user.get_grades()
+
+        random_response = choice(grade_list.grades)
+        filter_value = getattr(random_response, filter_name)
+
+        request_param = {filter_name: filter_value}
+
+        expected_max_grade = university_service_user.get_max_grade(request_param)
+        stats_list = university_service_user.get_grade_stats(request_param)
+
         assert expected_max_grade == stats_list.max, f"Expected {expected_max_grade}, but got {stats_list.max}"
+
+    @pytest.mark.parametrize("filter_name", [
+        "teacher_id",
+        "student_id"
+    ])
+    def test_filtered_grade_min(self, university_service_user, filter_name):
+        grade_list = university_service_user.get_grades()
+
+        random_response = choice(grade_list.grades)
+        filter_value = getattr(random_response, filter_name)
+
+        request_param = {filter_name: filter_value}
+
+        expected_min_grade = university_service_user.get_min_grade(request_param)
+        stats_list = university_service_user.get_grade_stats(request_param)
+
         assert expected_min_grade == stats_list.min, f"Expected {expected_min_grade}, but got {stats_list.min}"
+
+    @pytest.mark.parametrize("filter_name", [
+        "teacher_id",
+        "student_id"
+    ])
+    def test_filtered_grade_avg(self, university_service_user, filter_name):
+        grade_list = university_service_user.get_grades()
+
+        random_response = choice(grade_list.grades)
+        filter_value = getattr(random_response, filter_name)
+
+        request_param = {filter_name: filter_value}
+
+        expected_avg_grade = university_service_user.get_avg_grade(request_param)
+        stats_list = university_service_user.get_grade_stats(request_param)
+
         assert expected_avg_grade == stats_list.avg, f"Expected {expected_avg_grade}, but got {stats_list.avg}"
 
     def test_create_group_not_authorized(self):
+
         api_helper_unauthorized = GroupHelper(ApiUtils(url=UniversityService.SERVICE_URL))
-        json = GroupRequest(name=f"{self.faker.word()}{randint(1, 100)}").model_dump()
+        json = GroupRequest(name=self.RANDOM_NAME).model_dump()
 
         group_response = api_helper_unauthorized.post_group(json=json)
 
         no_authorized_response = NotAuthorized(**group_response.json())
         assert "Invalid login credentials" == no_authorized_response.detail, f"Expected error text: 'Invalid login credentials', but got {no_authorized_response.detail}"
 
-    def test_create_group_forbidden(self):
-        api_helper_unauthorized = GroupHelper(
-            ApiUtils(
-                url=UniversityService.SERVICE_URL,
-                headers={f"Authorization": f"Bearer {TokenData.INVALID_TOKEN}"}
-            ))
+    def test_create_group_forbidden(self, api_helper_unauthorized_invalid):
+        json = GroupRequest(name=self.RANDOM_NAME).model_dump()
 
-        json = GroupRequest(name=f"{self.faker.word()}{randint(1, 100)}").model_dump()
-
-        group_response = api_helper_unauthorized.post_group(json=json)
+        group_response = api_helper_unauthorized_invalid.post_group(json=json)
         forbidden_response = Forbidden(**group_response.json())
 
-        assert "Access denied" == forbidden_response.detail, f"Expected error text: 'Access denied', but got {forbidden_response.detail}"
+        assert "Invalid JWT token" == forbidden_response.detail, f"Expected error text: 'Invalid JWT token', but got {forbidden_response.detail}"
 
     def test_create_group_conflict(self, university_service_user, university_helper_user):
         groups_response_list = university_service_user.get_groups()
