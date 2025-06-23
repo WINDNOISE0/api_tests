@@ -7,7 +7,7 @@ class GradeHelper(BaseHelper):
     ENDPOINT_PREFIX = "/grades"
 
     ROOT_ENDPOINT = f"{ENDPOINT_PREFIX}/"
-    PATH_PARAM_ENDPOINT = f"{ENDPOINT_PREFIX}/" + "{}/"
+    PATH_PARAM_ENDPOINT = f"{ENDPOINT_PREFIX}/{{}}/"
     STATS_ENDPOINT = f'{ENDPOINT_PREFIX}/stats/'
 
     def post_grade(self, data: dict) -> requests.Response:
