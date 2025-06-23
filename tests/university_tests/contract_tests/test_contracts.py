@@ -99,7 +99,7 @@ class TestContracts:
         api_helper_unauthorized = GroupHelper(
             ApiUtils(
                 url=UniversityService.SERVICE_URL,
-                headers={f"Authorization": f"Bearer {TokenData.INVALID_TOKEN}"}
+                headers={"Authorization": f"Bearer {TokenData.INVALID_TOKEN}"}
             ))
 
         json = GroupRequest(name=self.RANDOM_NAME).model_dump()
