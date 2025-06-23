@@ -40,7 +40,7 @@ def auth_api_service_unauthorized(auth_api_utils_unauthorized):
 @pytest.fixture(scope="function", autouse=False)
 def university_api_utils_user(access_token_new_user):
     api_utils = ApiUtils(url=UniversityService.SERVICE_URL,
-                         headers={f"Authorization": f"Bearer {access_token_new_user}"})
+                         headers={"Authorization": f"Bearer {access_token_new_user}"})
     return api_utils
 
 
@@ -121,6 +121,6 @@ def api_helper_unauthorized_invalid():
     helper = GroupHelper(
         ApiUtils(
             url=UniversityService.SERVICE_URL,
-            headers={f"Authorization": f"Bearer {TokenData.INVALID_TOKEN}"}
+            headers={"Authorization": f"Bearer {TokenData.INVALID_TOKEN}"}
         ))
     return helper
