@@ -9,5 +9,5 @@ class Error(BaseModel):
 
 class ErrorText(StrEnum):
     FORBIDDEN = "Invalid JWT token"
-    NO_AUTH = "Invalid login credentials"
+    NO_AUTH = "Access denied"
     CONFLICT_RESPONSE = "Group is already created"

@@ -6,6 +6,7 @@ from pytest_check import check
 
 from services.university.helpers.group_helper import GroupHelper
 from services.university.models.error.error import Error, ErrorText
+from services.university.models.error.validation_error_list import ValidationErrorList
 from services.university.models.grade.grade_base import MIN_GRADE, MAX_GRADE
 from services.university.models.grade.grade_request import GradeRequest
 from services.university.models.group.group_request import GroupRequest
@@ -49,7 +50,7 @@ class TestBusinessU:
 
         filtered_list = university_service_user.get_grades({filter_name: expected_param})
 
-        check.is_in(random_response, filtered_list, f"Expected obj: {random_response}, but got: {filtered_list}")
+        check.is_in(random_response, filtered_list.grades, f"Expected obj: {random_response}, but got: {filtered_list.grades}")
 
         for obj in filtered_list.grades:
             actual_param = getattr(obj, filter_name)
@@ -142,12 +143,12 @@ class TestBusinessU:
 
         assert ErrorText.FORBIDDEN == forbidden_response.detail, f"Expected error text: {ErrorText.FORBIDDEN}, but got {forbidden_response.detail}"
 
-    def test_create_group_conflict(self, university_service_user, university_helper_user):
+    def test_create_group_conflict(self, university_service_user, group_helper_user):
         groups_response_list = university_service_user.get_groups()
         existing_group_name = choice(groups_response_list.groups).name
 
         json = GroupRequest(name=existing_group_name).model_dump()
-        group_response = university_helper_user.group.post_group(json=json)
+        group_response = group_helper_user.post_group(json=json)
 
         conflict_response = Error(**group_response.json())
         assert ErrorText.CONFLICT_RESPONSE == conflict_response.detail, f"Expected error text: {ErrorText.CONFLICT_RESPONSE}, but got {conflict_response.detail}"
@@ -157,10 +158,11 @@ class TestBusinessU:
         True,
         None
     ])
-    def test_create_group_validation_error(self, value, university_helper_user):
+    def test_create_group_validation_error(self, value, group_helper_user):
         json = {"name": value}
 
-        group_response = university_helper_user.group.post_group(json=json)
-        validation_error_response = Error(**group_response.json())
+        group_response = group_helper_user.post_group(json=json)
+
+        validation_error_response = ValidationErrorList(**group_response.json())
 
         assert validation_error_response.detail, "detail field should not be empty"
