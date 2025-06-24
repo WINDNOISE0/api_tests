@@ -1,6 +1,8 @@
 import os
+import time
 
 import pytest
+import requests
 from dotenv import load_dotenv
 
 from services.auth.auth_service import AuthService
@@ -125,3 +127,20 @@ def api_helper_unauthorized_invalid():
         ))
     return helper
 
+
+@pytest.fixture(scope="session", autouse=True)
+def auth_service_readiness():
+    timeout = 180
+    start_time = time.time()
+    while time.time() < start_time + timeout:
+        print("ping1")
+        try:
+            print("ping")
+            resp = requests.get(f"{AuthService.SERVICE_URL}/docs")
+            resp.raise_for_status()
+        except Exception:
+            time.sleep(1)   # ждём 1 секунду и пробуем снова
+        else:
+            break
+    else:
+        raise RuntimeError(f"Auth service wasn't started during '{timeout}' seconds.")

@@ -1,3 +1,4 @@
+import os
 import random
 
 from faker import Faker
@@ -27,7 +28,7 @@ from utils.api_utils import ApiUtils
 class UniversityService(BaseService):
     faker = Faker()
 
-    SERVICE_URL = "http://localhost:8001"
+    SERVICE_URL = os.getenv("UNIVERSITY_SERVICE_INTERNAL_URL")
 
     def __init__(self, api_utils: ApiUtils):
         super().__init__(api_utils)
