@@ -62,3 +62,6 @@ Thumbs.db
 # 🔹 Игнорируем файлы конфигурации IDE
 .vscode/
 *.iml
+
+allure-report/
+allure-results/

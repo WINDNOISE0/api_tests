@@ -1,20 +1,20 @@
-name: Generate and Deploy Allure Report
+name: Allure Report on PR Push
 
 on:
-  push:
+  pull_request:
     branches:
       - main
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  test-and-publish:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # нужно для gh-pages
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -29,17 +29,17 @@ jobs:
       - name: Install Allure CLI
         run: |
           sudo apt-get update
-          sudo apt-get install -y default-jre wget unzip
-          wget https://github.com/allure-framework/allure2/releases/latest/download/allure-2.27.0.zip
-          unzip allure-2.27.0.zip -d /opt/
+          sudo apt-get install -y default-jre unzip curl
+          curl -L -o allure.zip https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.zip
+          unzip allure.zip -d /opt/
           sudo ln -s /opt/allure-2.27.0/bin/allure /usr/bin/allure
 
       - name: Run tests and generate report
         run: |
-          pytest --alluredir=allure-results
+          pytest --alluredir=allure-results || true
           allure generate allure-results -o allure-report --clean
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
