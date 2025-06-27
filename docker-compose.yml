@@ -72,7 +72,6 @@ services:
     environment:
       AUTH_SERVICE_INTERNAL_URL: ${AUTH_SERVICE_INTERNAL_URL}
       UNIVERSITY_SERVICE_INTERNAL_URL: ${UNIVERSITY_SERVICE_INTERNAL_URL}
-
     container_name: test-framework
     depends_on:
       - auth
