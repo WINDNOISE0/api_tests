@@ -1,25 +1,34 @@
-name: Allure Report on PR Push
+name: Allure Report on PR
 
 on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   test-and-publish:
     runs-on: ubuntu-latest
 
+    services:  # если ты используешь docker-compose – отключи этот блок
+      auth:
+        image: your-auth-service-image  # ЗАМЕНИ на свой образ
+        ports:
+          - 8000:8000
+        options: >-
+          --health-cmd="curl -f http://localhost:8000/docs || exit 1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.11"
+          python-version: '3.11'
 
       - name: Install dependencies
         run: |
@@ -34,12 +43,20 @@ jobs:
           unzip allure.zip -d /opt/
           sudo ln -s /opt/allure-2.27.0/bin/allure /usr/bin/allure
 
+      - name: Wait for auth service
+        run: |
+          for i in {1..30}; do
+            curl -sSf http://localhost:8000/docs && break
+            echo "Waiting for AuthService..."
+            sleep 5
+          done
+
       - name: Run tests and generate report
         run: |
-          pytest --alluredir=allure-results || true
+          pytest --alluredir=allure-results
           allure generate allure-results -o allure-report --clean
 
-      - name: Deploy report to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
