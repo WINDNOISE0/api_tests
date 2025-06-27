@@ -1,4 +1,4 @@
-name: Allure Report on PR
+name: Allure Report via Docker Compose
 
 on:
   pull_request:
@@ -10,35 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Log in to DockerHub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Set up Docker Compose
+        run: docker compose version
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
+      - name: Build and run tests
         run: |
-          pip install -r requirements.txt
-          pip install allure-pytest
+          docker compose down || true
+          docker compose up --build --abort-on-container-exit || true
 
-      - name: Install Allure CLI
+      - name: Copy Allure report from container
         run: |
-          sudo apt-get update
-          sudo apt-get install -y default-jre unzip curl
-          curl -L -o allure.zip https://github.com/allure-framework/allure2/releases/download/2.27.0/allure-2.27.0.zip
-          unzip allure.zip -d /opt/
-          sudo ln -s /opt/allure-2.27.0/bin/allure /usr/bin/allure
-
-      - name: Run tests and generate report
-        run: |
-          pytest --alluredir=allure-results || true
-          allure generate allure-results -o allure-report --clean
+          mkdir -p allure-report
+          docker cp test-framework:/tests/allure-report ./allure-report || echo "No report found"
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
