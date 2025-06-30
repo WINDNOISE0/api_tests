@@ -1,0 +1,69 @@
+name: Run API Tests and Publish Allure Report
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Ruff Lint Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - name: Install Ruff
+        run: pip install ruff
+
+      - name: Run Ruff
+        run: ruff check .
+
+  test-and-publish:
+    name: Run Tests and Publish Allure Report
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Docker Compose
+        run: docker compose version
+
+      - name: Create .env file from GitHub Secrets and Vars
+        run: |
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+          echo "POSTGRES_DB_AUTH=${{ vars.POSTGRES_DB_AUTH }}" >> .env
+          echo "POSTGRES_DB_UNIVERSITY=${{ vars.POSTGRES_DB_UNIVERSITY }}" >> .env
+          echo "AUTH_SERVICE_INTERNAL_URL=${{ vars.AUTH_SERVICE_INTERNAL_URL }}" >> .env
+          echo "AUTH_SERVICE_API_URL=${{ vars.AUTH_SERVICE_API_URL }}" >> .env
+          echo "UNIVERSITY_SERVICE_INTERNAL_URL=${{ vars.UNIVERSITY_SERVICE_INTERNAL_URL }}" >> .env
+          echo "UNIVERSITY_SERVICE_API_URL=${{ vars.UNIVERSITY_SERVICE_API_URL }}" >> .env
+          echo "API_USERNAME=${{ secrets.API_USERNAME }}" >> .env
+          echo "API_PASSWORD=${{ secrets.API_PASSWORD }}" >> .env
+          echo "EMAIL=${{ vars.EMAIL }}" >> .env
+
+      - name: Build and run tests
+        run: |
+          docker compose down || true
+          docker compose up --build --abort-on-container-exit || true
+
+      - name: Copy Allure report from container
+        run: |
+          mkdir -p allure-report
+          docker cp test-framework:/tests/allure-report ./allure-report || echo "No report found"
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./allure-report
