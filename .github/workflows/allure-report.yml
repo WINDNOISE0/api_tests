@@ -1,6 +1,5 @@
 name: Allure Report via Docker Compose
 
-
 on:
   pull_request:
     branches:
@@ -18,6 +17,21 @@ jobs:
 
       - name: Set up Docker Compose
         run: docker compose version
+
+      - name: Create .env file from GitHub Secrets
+        run: |
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+          echo "POSTGRES_DB_AUTH=${{ secrets.POSTGRES_DB_AUTH }}" >> .env
+          echo "POSTGRES_DB_UNIVERSITY=${{ secrets.POSTGRES_DB_UNIVERSITY }}" >> .env
+          echo "AUTH_SERVICE_INTERNAL_URL=${{ secrets.AUTH_SERVICE_INTERNAL_URL }}" >> .env
+          echo "AUTH_SERVICE_API_URL=${{ secrets.AUTH_SERVICE_API_URL }}" >> .env
+          echo "UNIVERSITY_SERVICE_INTERNAL_URL=${{ secrets.UNIVERSITY_SERVICE_INTERNAL_URL }}" >> .env
+          echo "UNIVERSITY_SERVICE_API_URL=${{ secrets.UNIVERSITY_SERVICE_API_URL }}" >> .env
+          echo "API_USERNAME=${{ secrets.API_USERNAME }}" >> .env
+          echo "API_PASSWORD=${{ secrets.API_PASSWORD }}" >> .env
+          echo "EMAIL=${{ secrets.EMAIL }}" >> .env
+          
 
       - name: Build and run tests
         run: |
