@@ -1,0 +1,7 @@
+from pydantic import BaseModel
+
+from services.university.models.group.group_response import GroupResponse
+
+
+class GroupListResponse(BaseModel):
+    groups: list[GroupResponse]

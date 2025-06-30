@@ -1,0 +1,67 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 🔹 Игнорируем виртуальные окружения
+venv/
+.env/
+env/
+.venv/
+.env
+pip-log.txt
+pip-delete-this-directory.txt
+
+# 🔹 Игнорируем файлы логов и временные файлы
+logs/
+*.log
+*.out
+*.err
+*.pid
+*.seed
+*.bak
+scripts/
+
+# 🔹 Игнорируем файлы настроек PyCharm
+.idea/
+
+# 🔹 Игнорируем базы данных SQLite
+*.sqlite3
+*.db
+
+# 🔹 Игнорируем файлы, созданные Jupyter Notebook
+.ipynb_checkpoints/
+
+# 🔹 Игнорируем файлы тестов и покрытия кода
+.tox/
+.nox/
+.coverage
+htmlcov/
+pytest_cache/
+.cache/
+
+# 🔹 Игнорируем файлы конфигурации Docker
+docker-compose.override.yml
+
+# 🔹 Игнорируем файлы кода, сгенерированные в проектах
+dist/
+build/
+*.egg-info/
+*.egg
+*.manifest
+*.spec
+
+# 🔹 Игнорируем временные файлы и файлы редакторов
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+.DS_Store
+Thumbs.db
+
+# 🔹 Игнорируем файлы конфигурации IDE
+.vscode/
+*.iml
+
+allure-report/
+allure-results/
