@@ -1,0 +1,62 @@
+[32mINFO    [0m Logger:logger.py:35 =====================    Request    =====================
+[32mINFO    [0m Logger:logger.py:35 ENDPOINT: http://auth:8000/auth/register/
+[32mINFO    [0m Logger:logger.py:35 curl -H 'Content-Length: 143' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=racheltaylor&password=o0wrVhPc%40ut9Fjv9Ri2BMOBUkB9rU%21&password_repeat=o0wrVhPc%40ut9Fjv9Ri2BMOBUkB9rU%21&email=oreese%40example.com' http://auth:8000/auth/register/
+[32mINFO    [0m Logger:logger.py:35 Headers request: 
+{'date': 'Mon, 30 Jun 2025 13:22:52 GMT', 'server': 'uvicorn', 'content-length': '28', 'content-type': 'application/json'}
+[32mINFO    [0m Logger:logger.py:35 
+[32mINFO    [0m Logger:logger.py:35 =====================    Response    =====================
+[32mINFO    [0m Logger:logger.py:35 Status code: '201', elapsed_time='0:00:00.271717']
+[32mINFO    [0m Logger:logger.py:35 ---------------------------body---------------------------
+[32mINFO    [0m Logger:logger.py:35 {
+  "detail": "User registered"
+}
+[32mINFO    [0m Logger:logger.py:35 ----------------------------------------------------------
+
+
+
+[32mINFO    [0m Logger:logger.py:35 =====================    Request    =====================
+[32mINFO    [0m Logger:logger.py:35 ENDPOINT: http://auth:8000/auth/login/
+[32mINFO    [0m Logger:logger.py:35 curl -H 'Content-Length: 65' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=racheltaylor&password=o0wrVhPc%40ut9Fjv9Ri2BMOBUkB9rU%21' http://auth:8000/auth/login/
+[32mINFO    [0m Logger:logger.py:35 Headers request: 
+{'date': 'Mon, 30 Jun 2025 13:22:52 GMT', 'server': 'uvicorn', 'content-length': '515', 'content-type': 'application/json'}
+[32mINFO    [0m Logger:logger.py:35 
+[32mINFO    [0m Logger:logger.py:35 =====================    Response    =====================
+[32mINFO    [0m Logger:logger.py:35 Status code: '200', elapsed_time='0:00:00.311777']
+[32mINFO    [0m Logger:logger.py:35 ---------------------------body---------------------------
+[32mINFO    [0m Logger:logger.py:35 {
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJ1c2VybmFtZSI6InJhY2hlbHRheWxvciIsImV4cCI6MTc1MTI5Njk3MywiaWF0IjoxNzUxMjg5NzczfQ.JFftD7S2ipoQhIOTOQ8IXVHJ_H8N22YQpH17BzhBg8PBjyWwe9BT-k-ZtLVTSQ0CofpKF-x1gdyxpzJN66mD4WsXIZBg9pJ_jVSWzaI9zOvqgNvj8y5cpWagHORNPwaCguz2C6tSY7QAk0yrRFzapY6rFKHAZroThZvtn3gqGSuMmKneGv7UM6A6cnwaRm7BDjnUVtxs3AQTu9mk9PlN1zswSdVRvooTwknnbV6OLgQjcNq17YAzMjKdIO1WTQTTh9hh_UjPV-SqJyyPNb6bcvSKgC_FlC5VLBRSVoFqkxxmIObf42GQifUFLhgmqFOahD2-g4XivtV_mE0iUcsuDA",
+  "token_type": "Bearer"
+}
+[32mINFO    [0m Logger:logger.py:35 ----------------------------------------------------------
+[32mINFO    [0m Logger:logger.py:35 =====================    Request    =====================
+[32mINFO    [0m Logger:logger.py:35 ENDPOINT: http://university:8000/groups/
+[32mINFO    [0m Logger:logger.py:35 curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJ1c2VybmFtZSI6InJhY2hlbHRheWxvciIsImV4cCI6MTc1MTI5Njk3MywiaWF0IjoxNzUxMjg5NzczfQ.JFftD7S2ipoQhIOTOQ8IXVHJ_H8N22YQpH17BzhBg8PBjyWwe9BT-k-ZtLVTSQ0CofpKF-x1gdyxpzJN66mD4WsXIZBg9pJ_jVSWzaI9zOvqgNvj8y5cpWagHORNPwaCguz2C6tSY7QAk0yrRFzapY6rFKHAZroThZvtn3gqGSuMmKneGv7UM6A6cnwaRm7BDjnUVtxs3AQTu9mk9PlN1zswSdVRvooTwknnbV6OLgQjcNq17YAzMjKdIO1WTQTTh9hh_UjPV-SqJyyPNb6bcvSKgC_FlC5VLBRSVoFqkxxmIObf42GQifUFLhgmqFOahD2-g4XivtV_mE0iUcsuDA' http://university:8000/groups/
+[32mINFO    [0m Logger:logger.py:35 Headers request: 
+{'date': 'Mon, 30 Jun 2025 13:22:52 GMT', 'server': 'uvicorn', 'content-length': '26', 'content-type': 'application/json'}
+[32mINFO    [0m Logger:logger.py:35 
+[32mINFO    [0m Logger:logger.py:35 =====================    Response    =====================
+[32mINFO    [0m Logger:logger.py:35 Status code: '200', elapsed_time='0:00:00.008660']
+[32mINFO    [0m Logger:logger.py:35 ---------------------------body---------------------------
+[32mINFO    [0m Logger:logger.py:35 [
+  {
+    "name": "site84",
+    "id": 1
+  }
+]
+[32mINFO    [0m Logger:logger.py:35 ----------------------------------------------------------
+
+
+
+[32mINFO    [0m Logger:logger.py:35 =====================    Request    =====================
+[32mINFO    [0m Logger:logger.py:35 ENDPOINT: http://university:8000/groups/
+[32mINFO    [0m Logger:logger.py:35 curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJ1c2VybmFtZSI6InJhY2hlbHRheWxvciIsImV4cCI6MTc1MTI5Njk3MywiaWF0IjoxNzUxMjg5NzczfQ.JFftD7S2ipoQhIOTOQ8IXVHJ_H8N22YQpH17BzhBg8PBjyWwe9BT-k-ZtLVTSQ0CofpKF-x1gdyxpzJN66mD4WsXIZBg9pJ_jVSWzaI9zOvqgNvj8y5cpWagHORNPwaCguz2C6tSY7QAk0yrRFzapY6rFKHAZroThZvtn3gqGSuMmKneGv7UM6A6cnwaRm7BDjnUVtxs3AQTu9mk9PlN1zswSdVRvooTwknnbV6OLgQjcNq17YAzMjKdIO1WTQTTh9hh_UjPV-SqJyyPNb6bcvSKgC_FlC5VLBRSVoFqkxxmIObf42GQifUFLhgmqFOahD2-g4XivtV_mE0iUcsuDA' -H 'Content-Length: 18' -H 'Content-Type: application/json' -d '{"name": "site84"}' http://university:8000/groups/
+[32mINFO    [0m Logger:logger.py:35 Headers request: 
+{'date': 'Mon, 30 Jun 2025 13:22:52 GMT', 'server': 'uvicorn', 'content-length': '37', 'content-type': 'application/json'}
+[32mINFO    [0m Logger:logger.py:35 
+[32mINFO    [0m Logger:logger.py:35 =====================    Response    =====================
+[32mINFO    [0m Logger:logger.py:35 Status code: '409', elapsed_time='0:00:00.006053']
+[32mINFO    [0m Logger:logger.py:35 ---------------------------body---------------------------
+[32mINFO    [0m Logger:logger.py:35 {
+  "detail": "Group is already created"
+}
+[32mINFO    [0m Logger:logger.py:35 ----------------------------------------------------------

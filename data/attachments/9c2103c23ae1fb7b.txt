@@ -1,0 +1,68 @@
+[2025-06-30 13:22:53,434 - INFO] - =====================    Request    =====================
+[2025-06-30 13:22:53,434 - INFO] - ENDPOINT: http://auth:8000/auth/register/
+[2025-06-30 13:22:53,434 - INFO] - curl -H 'Content-Length: 143' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=racheltaylor&password=o0wrVhPc%40ut9Fjv9Ri2BMOBUkB9rU%21&password_repeat=o0wrVhPc%40ut9Fjv9Ri2BMOBUkB9rU%21&email=oreese%40example.com' http://auth:8000/auth/register/
+[2025-06-30 13:22:53,434 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 13:22:52 GMT', 'server': 'uvicorn', 'content-length': '28', 'content-type': 'application/json'}
+[2025-06-30 13:22:53,434 - INFO] - 
+[2025-06-30 13:22:53,434 - INFO] - =====================    Response    =====================
+[2025-06-30 13:22:53,434 - INFO] - Status code: '201', elapsed_time='0:00:00.271717']
+[2025-06-30 13:22:53,435 - INFO] - ---------------------------body---------------------------
+[2025-06-30 13:22:53,435 - INFO] - {
+  "detail": "User registered"
+}
+[2025-06-30 13:22:53,435 - INFO] - ----------------------------------------------------------
+
+
+
+[2025-06-30 13:22:53,787 - INFO] - =====================    Request    =====================
+[2025-06-30 13:22:53,787 - INFO] - ENDPOINT: http://auth:8000/auth/login/
+[2025-06-30 13:22:53,787 - INFO] - curl -H 'Content-Length: 65' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=racheltaylor&password=o0wrVhPc%40ut9Fjv9Ri2BMOBUkB9rU%21' http://auth:8000/auth/login/
+[2025-06-30 13:22:53,787 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 13:22:52 GMT', 'server': 'uvicorn', 'content-length': '515', 'content-type': 'application/json'}
+[2025-06-30 13:22:53,787 - INFO] - 
+[2025-06-30 13:22:53,788 - INFO] - =====================    Response    =====================
+[2025-06-30 13:22:53,788 - INFO] - Status code: '200', elapsed_time='0:00:00.311777']
+[2025-06-30 13:22:53,788 - INFO] - ---------------------------body---------------------------
+[2025-06-30 13:22:53,788 - INFO] - {
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJ1c2VybmFtZSI6InJhY2hlbHRheWxvciIsImV4cCI6MTc1MTI5Njk3MywiaWF0IjoxNzUxMjg5NzczfQ.JFftD7S2ipoQhIOTOQ8IXVHJ_H8N22YQpH17BzhBg8PBjyWwe9BT-k-ZtLVTSQ0CofpKF-x1gdyxpzJN66mD4WsXIZBg9pJ_jVSWzaI9zOvqgNvj8y5cpWagHORNPwaCguz2C6tSY7QAk0yrRFzapY6rFKHAZroThZvtn3gqGSuMmKneGv7UM6A6cnwaRm7BDjnUVtxs3AQTu9mk9PlN1zswSdVRvooTwknnbV6OLgQjcNq17YAzMjKdIO1WTQTTh9hh_UjPV-SqJyyPNb6bcvSKgC_FlC5VLBRSVoFqkxxmIObf42GQifUFLhgmqFOahD2-g4XivtV_mE0iUcsuDA",
+  "token_type": "Bearer"
+}
+[2025-06-30 13:22:53,788 - INFO] - ----------------------------------------------------------
+
+
+
+[2025-06-30 13:22:53,798 - INFO] - =====================    Request    =====================
+[2025-06-30 13:22:53,798 - INFO] - ENDPOINT: http://university:8000/groups/
+[2025-06-30 13:22:53,798 - INFO] - curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJ1c2VybmFtZSI6InJhY2hlbHRheWxvciIsImV4cCI6MTc1MTI5Njk3MywiaWF0IjoxNzUxMjg5NzczfQ.JFftD7S2ipoQhIOTOQ8IXVHJ_H8N22YQpH17BzhBg8PBjyWwe9BT-k-ZtLVTSQ0CofpKF-x1gdyxpzJN66mD4WsXIZBg9pJ_jVSWzaI9zOvqgNvj8y5cpWagHORNPwaCguz2C6tSY7QAk0yrRFzapY6rFKHAZroThZvtn3gqGSuMmKneGv7UM6A6cnwaRm7BDjnUVtxs3AQTu9mk9PlN1zswSdVRvooTwknnbV6OLgQjcNq17YAzMjKdIO1WTQTTh9hh_UjPV-SqJyyPNb6bcvSKgC_FlC5VLBRSVoFqkxxmIObf42GQifUFLhgmqFOahD2-g4XivtV_mE0iUcsuDA' http://university:8000/groups/
+[2025-06-30 13:22:53,798 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 13:22:52 GMT', 'server': 'uvicorn', 'content-length': '26', 'content-type': 'application/json'}
+[2025-06-30 13:22:53,798 - INFO] - 
+[2025-06-30 13:22:53,798 - INFO] - =====================    Response    =====================
+[2025-06-30 13:22:53,798 - INFO] - Status code: '200', elapsed_time='0:00:00.008660']
+[2025-06-30 13:22:53,798 - INFO] - ---------------------------body---------------------------
+[2025-06-30 13:22:53,798 - INFO] - [
+  {
+    "name": "site84",
+    "id": 1
+  }
+]
+[2025-06-30 13:22:53,798 - INFO] - ----------------------------------------------------------
+
+
+
+[2025-06-30 13:22:53,845 - INFO] - =====================    Request    =====================
+[2025-06-30 13:22:53,845 - INFO] - ENDPOINT: http://university:8000/groups/
+[2025-06-30 13:22:53,845 - INFO] - curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJ1c2VybmFtZSI6InJhY2hlbHRheWxvciIsImV4cCI6MTc1MTI5Njk3MywiaWF0IjoxNzUxMjg5NzczfQ.JFftD7S2ipoQhIOTOQ8IXVHJ_H8N22YQpH17BzhBg8PBjyWwe9BT-k-ZtLVTSQ0CofpKF-x1gdyxpzJN66mD4WsXIZBg9pJ_jVSWzaI9zOvqgNvj8y5cpWagHORNPwaCguz2C6tSY7QAk0yrRFzapY6rFKHAZroThZvtn3gqGSuMmKneGv7UM6A6cnwaRm7BDjnUVtxs3AQTu9mk9PlN1zswSdVRvooTwknnbV6OLgQjcNq17YAzMjKdIO1WTQTTh9hh_UjPV-SqJyyPNb6bcvSKgC_FlC5VLBRSVoFqkxxmIObf42GQifUFLhgmqFOahD2-g4XivtV_mE0iUcsuDA' -H 'Content-Length: 18' -H 'Content-Type: application/json' -d '{"name": "site84"}' http://university:8000/groups/
+[2025-06-30 13:22:53,845 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 13:22:52 GMT', 'server': 'uvicorn', 'content-length': '37', 'content-type': 'application/json'}
+[2025-06-30 13:22:53,845 - INFO] - 
+[2025-06-30 13:22:53,845 - INFO] - =====================    Response    =====================
+[2025-06-30 13:22:53,845 - INFO] - Status code: '409', elapsed_time='0:00:00.006053']
+[2025-06-30 13:22:53,846 - INFO] - ---------------------------body---------------------------
+[2025-06-30 13:22:53,846 - INFO] - {
+  "detail": "Group is already created"
+}
+[2025-06-30 13:22:53,846 - INFO] - ----------------------------------------------------------
+
+
+

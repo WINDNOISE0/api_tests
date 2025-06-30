@@ -1,0 +1,88 @@
+[32mINFO    [0m Logger:logger.py:35 =====================    Request    =====================
+[32mINFO    [0m Logger:logger.py:35 ENDPOINT: http://auth:8000/auth/register/
+[32mINFO    [0m Logger:logger.py:35 curl -H 'Content-Length: 146' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=anncook&password=4y%26Z%264Ol%40Amh011P%23XQL201s2CcIwR&password_repeat=4y%26Z%264Ol%40Amh011P%23XQL201s2CcIwR&email=qmunoz%40example.org' http://auth:8000/auth/register/
+[32mINFO    [0m Logger:logger.py:35 Headers request: 
+{'date': 'Mon, 30 Jun 2025 13:22:48 GMT', 'server': 'uvicorn', 'content-length': '28', 'content-type': 'application/json'}
+[32mINFO    [0m Logger:logger.py:35 
+[32mINFO    [0m Logger:logger.py:35 =====================    Response    =====================
+[32mINFO    [0m Logger:logger.py:35 Status code: '201', elapsed_time='0:00:00.271521']
+[32mINFO    [0m Logger:logger.py:35 ---------------------------body---------------------------
+[32mINFO    [0m Logger:logger.py:35 {
+  "detail": "User registered"
+}
+[32mINFO    [0m Logger:logger.py:35 ----------------------------------------------------------
+
+
+
+[32mINFO    [0m Logger:logger.py:35 =====================    Request    =====================
+[32mINFO    [0m Logger:logger.py:35 ENDPOINT: http://auth:8000/auth/login/
+[32mINFO    [0m Logger:logger.py:35 curl -H 'Content-Length: 64' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=anncook&password=4y%26Z%264Ol%40Amh011P%23XQL201s2CcIwR' http://auth:8000/auth/login/
+[32mINFO    [0m Logger:logger.py:35 Headers request: 
+{'date': 'Mon, 30 Jun 2025 13:22:48 GMT', 'server': 'uvicorn', 'content-length': '507', 'content-type': 'application/json'}
+[32mINFO    [0m Logger:logger.py:35 
+[32mINFO    [0m Logger:logger.py:35 =====================    Response    =====================
+[32mINFO    [0m Logger:logger.py:35 Status code: '200', elapsed_time='0:00:00.311906']
+[32mINFO    [0m Logger:logger.py:35 ---------------------------body---------------------------
+[32mINFO    [0m Logger:logger.py:35 {
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsInVzZXJuYW1lIjoiYW5uY29vayIsImV4cCI6MTc1MTI5Njk2OSwiaWF0IjoxNzUxMjg5NzY5fQ.SSGL0FAA7_UQ8zmak1ETzPLf5ZhY-8rdnRhikH1LgipKp_OKAy-4q7LaLKIGB6zXXfR4ixkbmf7a3AWr6OFTP6orQNnBDKFOKWgfTlniUq_qgSFQMeLiyYaEPstnCHda5o7i7RBTC2axMt-FJeL4sdNsvS7gFyL8QUJ16BaKLw3y7m0hpGn2TqoCFl3KlOnDbvdA4vKFkOdwag0DzxLRUZW_B1PhvxfiBxA3aKZRqdnuGZ2t4yHSDGnL1y9tpzg9ESWhU02CNgp61JTHral3HOVN3UqqWqhGYZqMXGV7i0mzflD0b4hcjcJ9mJHolFRIo3YnoeFoNPTuta5vsH1GmQ",
+  "token_type": "Bearer"
+}
+[32mINFO    [0m Logger:logger.py:35 ----------------------------------------------------------
+[32mINFO    [0m Logger:logger.py:35 =====================    Request    =====================
+[32mINFO    [0m Logger:logger.py:35 ENDPOINT: http://university:8000/grades/
+[32mINFO    [0m Logger:logger.py:35 curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsInVzZXJuYW1lIjoiYW5uY29vayIsImV4cCI6MTc1MTI5Njk2OSwiaWF0IjoxNzUxMjg5NzY5fQ.SSGL0FAA7_UQ8zmak1ETzPLf5ZhY-8rdnRhikH1LgipKp_OKAy-4q7LaLKIGB6zXXfR4ixkbmf7a3AWr6OFTP6orQNnBDKFOKWgfTlniUq_qgSFQMeLiyYaEPstnCHda5o7i7RBTC2axMt-FJeL4sdNsvS7gFyL8QUJ16BaKLw3y7m0hpGn2TqoCFl3KlOnDbvdA4vKFkOdwag0DzxLRUZW_B1PhvxfiBxA3aKZRqdnuGZ2t4yHSDGnL1y9tpzg9ESWhU02CNgp61JTHral3HOVN3UqqWqhGYZqMXGV7i0mzflD0b4hcjcJ9mJHolFRIo3YnoeFoNPTuta5vsH1GmQ' http://university:8000/grades/
+[32mINFO    [0m Logger:logger.py:35 Headers request: 
+{'date': 'Mon, 30 Jun 2025 13:22:48 GMT', 'server': 'uvicorn', 'content-length': '50', 'content-type': 'application/json'}
+[32mINFO    [0m Logger:logger.py:35 
+[32mINFO    [0m Logger:logger.py:35 =====================    Response    =====================
+[32mINFO    [0m Logger:logger.py:35 Status code: '200', elapsed_time='0:00:00.008446']
+[32mINFO    [0m Logger:logger.py:35 ---------------------------body---------------------------
+[32mINFO    [0m Logger:logger.py:35 [
+  {
+    "teacher_id": 1,
+    "student_id": 1,
+    "grade": 3,
+    "id": 1
+  }
+]
+[32mINFO    [0m Logger:logger.py:35 ----------------------------------------------------------
+
+
+
+[32mINFO    [0m Logger:logger.py:35 =====================    Request    =====================
+[32mINFO    [0m Logger:logger.py:35 ENDPOINT: http://university:8000/grades/?student_id=1
+[32mINFO    [0m Logger:logger.py:35 curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsInVzZXJuYW1lIjoiYW5uY29vayIsImV4cCI6MTc1MTI5Njk2OSwiaWF0IjoxNzUxMjg5NzY5fQ.SSGL0FAA7_UQ8zmak1ETzPLf5ZhY-8rdnRhikH1LgipKp_OKAy-4q7LaLKIGB6zXXfR4ixkbmf7a3AWr6OFTP6orQNnBDKFOKWgfTlniUq_qgSFQMeLiyYaEPstnCHda5o7i7RBTC2axMt-FJeL4sdNsvS7gFyL8QUJ16BaKLw3y7m0hpGn2TqoCFl3KlOnDbvdA4vKFkOdwag0DzxLRUZW_B1PhvxfiBxA3aKZRqdnuGZ2t4yHSDGnL1y9tpzg9ESWhU02CNgp61JTHral3HOVN3UqqWqhGYZqMXGV7i0mzflD0b4hcjcJ9mJHolFRIo3YnoeFoNPTuta5vsH1GmQ' 'http://university:8000/grades/?student_id=1'
+[32mINFO    [0m Logger:logger.py:35 Headers request: 
+{'date': 'Mon, 30 Jun 2025 13:22:48 GMT', 'server': 'uvicorn', 'content-length': '50', 'content-type': 'application/json'}
+[32mINFO    [0m Logger:logger.py:35 
+[32mINFO    [0m Logger:logger.py:35 =====================    Response    =====================
+[32mINFO    [0m Logger:logger.py:35 Status code: '200', elapsed_time='0:00:00.006145']
+[32mINFO    [0m Logger:logger.py:35 ---------------------------body---------------------------
+[32mINFO    [0m Logger:logger.py:35 [
+  {
+    "teacher_id": 1,
+    "student_id": 1,
+    "grade": 3,
+    "id": 1
+  }
+]
+[32mINFO    [0m Logger:logger.py:35 ----------------------------------------------------------
+
+
+
+[32mINFO    [0m Logger:logger.py:35 =====================    Request    =====================
+[32mINFO    [0m Logger:logger.py:35 ENDPOINT: http://university:8000/grades/stats/?student_id=1
+[32mINFO    [0m Logger:logger.py:35 curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsInVzZXJuYW1lIjoiYW5uY29vayIsImV4cCI6MTc1MTI5Njk2OSwiaWF0IjoxNzUxMjg5NzY5fQ.SSGL0FAA7_UQ8zmak1ETzPLf5ZhY-8rdnRhikH1LgipKp_OKAy-4q7LaLKIGB6zXXfR4ixkbmf7a3AWr6OFTP6orQNnBDKFOKWgfTlniUq_qgSFQMeLiyYaEPstnCHda5o7i7RBTC2axMt-FJeL4sdNsvS7gFyL8QUJ16BaKLw3y7m0hpGn2TqoCFl3KlOnDbvdA4vKFkOdwag0DzxLRUZW_B1PhvxfiBxA3aKZRqdnuGZ2t4yHSDGnL1y9tpzg9ESWhU02CNgp61JTHral3HOVN3UqqWqhGYZqMXGV7i0mzflD0b4hcjcJ9mJHolFRIo3YnoeFoNPTuta5vsH1GmQ' 'http://university:8000/grades/stats/?student_id=1'
+[32mINFO    [0m Logger:logger.py:35 Headers request: 
+{'date': 'Mon, 30 Jun 2025 13:22:48 GMT', 'server': 'uvicorn', 'content-length': '37', 'content-type': 'application/json'}
+[32mINFO    [0m Logger:logger.py:35 
+[32mINFO    [0m Logger:logger.py:35 =====================    Response    =====================
+[32mINFO    [0m Logger:logger.py:35 Status code: '200', elapsed_time='0:00:00.006345']
+[32mINFO    [0m Logger:logger.py:35 ---------------------------body---------------------------
+[32mINFO    [0m Logger:logger.py:35 {
+  "count": 1,
+  "min": 3,
+  "max": 3,
+  "avg": 3.0
+}
+[32mINFO    [0m Logger:logger.py:35 ----------------------------------------------------------
