@@ -1,0 +1,94 @@
+[2025-06-30 09:13:21,615 - INFO] - =====================    Request    =====================
+[2025-06-30 09:13:21,615 - INFO] - ENDPOINT: http://auth:8000/auth/register/
+[2025-06-30 09:13:21,615 - INFO] - curl -H 'Content-Length: 172' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=xhernandez&password=%29%26%2AJC4oAcf0H%2A6qBKn%24Hq%25%5E%21%253wrYJ&password_repeat=%29%26%2AJC4oAcf0H%2A6qBKn%24Hq%25%5E%21%253wrYJ&email=davistony%40example.net' http://auth:8000/auth/register/
+[2025-06-30 09:13:21,615 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:21 GMT', 'server': 'uvicorn', 'content-length': '28', 'content-type': 'application/json'}
+[2025-06-30 09:13:21,615 - INFO] - 
+[2025-06-30 09:13:21,615 - INFO] - =====================    Response    =====================
+[2025-06-30 09:13:21,616 - INFO] - Status code: '201', elapsed_time='0:00:00.273268']
+[2025-06-30 09:13:21,616 - INFO] - ---------------------------body---------------------------
+[2025-06-30 09:13:21,616 - INFO] - {
+  "detail": "User registered"
+}
+[2025-06-30 09:13:21,616 - INFO] - ----------------------------------------------------------
+
+
+
+[2025-06-30 09:13:21,970 - INFO] - =====================    Request    =====================
+[2025-06-30 09:13:21,970 - INFO] - ENDPOINT: http://auth:8000/auth/login/
+[2025-06-30 09:13:21,970 - INFO] - curl -H 'Content-Length: 77' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=xhernandez&password=%29%26%2AJC4oAcf0H%2A6qBKn%24Hq%25%5E%21%253wrYJ' http://auth:8000/auth/login/
+[2025-06-30 09:13:21,970 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:21 GMT', 'server': 'uvicorn', 'content-length': '511', 'content-type': 'application/json'}
+[2025-06-30 09:13:21,970 - INFO] - 
+[2025-06-30 09:13:21,970 - INFO] - =====================    Response    =====================
+[2025-06-30 09:13:21,970 - INFO] - Status code: '200', elapsed_time='0:00:00.313227']
+[2025-06-30 09:13:21,971 - INFO] - ---------------------------body---------------------------
+[2025-06-30 09:13:21,971 - INFO] - {
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsInVzZXJuYW1lIjoieGhlcm5hbmRleiIsImV4cCI6MTc1MTI4MjAwMSwiaWF0IjoxNzUxMjc0ODAxfQ.awoVo-Nj5apxTV0RnQZkUWw-k8DFNNG2ckPJJpZjtvcMwJvJTg-MbjjAAKAIN84cuVX3OpuQiCKRmvOkTF9YYrnM8g26ewFkxjCTsxdN7U89lRt74Jlu9xXm2ChNvsf-WtKf-bVKEx1ayZLy4C1Ahe7Rwtz47uHun2LePArnj04o33G1EO3T72pV3EhPv7UyBEFVJeLS5Pp1dTDKcZou-gqboY-2Ga8x11bSqmWlNecDuIxVD2liUG_qQRlbIib1xRQFumOaqyGqitQIRZGFrPJl6sj8HMImbvK2cAfj591SsIoBQwG6mFU2cZO3cGvluF_Ws8xwb3pQEOQ-rZFqaQ",
+  "token_type": "Bearer"
+}
+[2025-06-30 09:13:21,971 - INFO] - ----------------------------------------------------------
+
+
+
+[2025-06-30 09:13:21,981 - INFO] - =====================    Request    =====================
+[2025-06-30 09:13:21,981 - INFO] - ENDPOINT: http://university:8000/grades/
+[2025-06-30 09:13:21,981 - INFO] - curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsInVzZXJuYW1lIjoieGhlcm5hbmRleiIsImV4cCI6MTc1MTI4MjAwMSwiaWF0IjoxNzUxMjc0ODAxfQ.awoVo-Nj5apxTV0RnQZkUWw-k8DFNNG2ckPJJpZjtvcMwJvJTg-MbjjAAKAIN84cuVX3OpuQiCKRmvOkTF9YYrnM8g26ewFkxjCTsxdN7U89lRt74Jlu9xXm2ChNvsf-WtKf-bVKEx1ayZLy4C1Ahe7Rwtz47uHun2LePArnj04o33G1EO3T72pV3EhPv7UyBEFVJeLS5Pp1dTDKcZou-gqboY-2Ga8x11bSqmWlNecDuIxVD2liUG_qQRlbIib1xRQFumOaqyGqitQIRZGFrPJl6sj8HMImbvK2cAfj591SsIoBQwG6mFU2cZO3cGvluF_Ws8xwb3pQEOQ-rZFqaQ' http://university:8000/grades/
+[2025-06-30 09:13:21,981 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:21 GMT', 'server': 'uvicorn', 'content-length': '50', 'content-type': 'application/json'}
+[2025-06-30 09:13:21,981 - INFO] - 
+[2025-06-30 09:13:21,981 - INFO] - =====================    Response    =====================
+[2025-06-30 09:13:21,981 - INFO] - Status code: '200', elapsed_time='0:00:00.008642']
+[2025-06-30 09:13:21,981 - INFO] - ---------------------------body---------------------------
+[2025-06-30 09:13:21,981 - INFO] - [
+  {
+    "teacher_id": 1,
+    "student_id": 1,
+    "grade": 2,
+    "id": 1
+  }
+]
+[2025-06-30 09:13:21,981 - INFO] - ----------------------------------------------------------
+
+
+
+[2025-06-30 09:13:22,029 - INFO] - =====================    Request    =====================
+[2025-06-30 09:13:22,029 - INFO] - ENDPOINT: http://university:8000/grades/?teacher_id=1
+[2025-06-30 09:13:22,029 - INFO] - curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsInVzZXJuYW1lIjoieGhlcm5hbmRleiIsImV4cCI6MTc1MTI4MjAwMSwiaWF0IjoxNzUxMjc0ODAxfQ.awoVo-Nj5apxTV0RnQZkUWw-k8DFNNG2ckPJJpZjtvcMwJvJTg-MbjjAAKAIN84cuVX3OpuQiCKRmvOkTF9YYrnM8g26ewFkxjCTsxdN7U89lRt74Jlu9xXm2ChNvsf-WtKf-bVKEx1ayZLy4C1Ahe7Rwtz47uHun2LePArnj04o33G1EO3T72pV3EhPv7UyBEFVJeLS5Pp1dTDKcZou-gqboY-2Ga8x11bSqmWlNecDuIxVD2liUG_qQRlbIib1xRQFumOaqyGqitQIRZGFrPJl6sj8HMImbvK2cAfj591SsIoBQwG6mFU2cZO3cGvluF_Ws8xwb3pQEOQ-rZFqaQ' 'http://university:8000/grades/?teacher_id=1'
+[2025-06-30 09:13:22,029 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:21 GMT', 'server': 'uvicorn', 'content-length': '50', 'content-type': 'application/json'}
+[2025-06-30 09:13:22,029 - INFO] - 
+[2025-06-30 09:13:22,029 - INFO] - =====================    Response    =====================
+[2025-06-30 09:13:22,029 - INFO] - Status code: '200', elapsed_time='0:00:00.006863']
+[2025-06-30 09:13:22,030 - INFO] - ---------------------------body---------------------------
+[2025-06-30 09:13:22,030 - INFO] - [
+  {
+    "teacher_id": 1,
+    "student_id": 1,
+    "grade": 2,
+    "id": 1
+  }
+]
+[2025-06-30 09:13:22,030 - INFO] - ----------------------------------------------------------
+
+
+
+[2025-06-30 09:13:22,078 - INFO] - =====================    Request    =====================
+[2025-06-30 09:13:22,078 - INFO] - ENDPOINT: http://university:8000/grades/stats/?teacher_id=1
+[2025-06-30 09:13:22,078 - INFO] - curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjYsInVzZXJuYW1lIjoieGhlcm5hbmRleiIsImV4cCI6MTc1MTI4MjAwMSwiaWF0IjoxNzUxMjc0ODAxfQ.awoVo-Nj5apxTV0RnQZkUWw-k8DFNNG2ckPJJpZjtvcMwJvJTg-MbjjAAKAIN84cuVX3OpuQiCKRmvOkTF9YYrnM8g26ewFkxjCTsxdN7U89lRt74Jlu9xXm2ChNvsf-WtKf-bVKEx1ayZLy4C1Ahe7Rwtz47uHun2LePArnj04o33G1EO3T72pV3EhPv7UyBEFVJeLS5Pp1dTDKcZou-gqboY-2Ga8x11bSqmWlNecDuIxVD2liUG_qQRlbIib1xRQFumOaqyGqitQIRZGFrPJl6sj8HMImbvK2cAfj591SsIoBQwG6mFU2cZO3cGvluF_Ws8xwb3pQEOQ-rZFqaQ' 'http://university:8000/grades/stats/?teacher_id=1'
+[2025-06-30 09:13:22,078 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:21 GMT', 'server': 'uvicorn', 'content-length': '37', 'content-type': 'application/json'}
+[2025-06-30 09:13:22,078 - INFO] - 
+[2025-06-30 09:13:22,078 - INFO] - =====================    Response    =====================
+[2025-06-30 09:13:22,078 - INFO] - Status code: '200', elapsed_time='0:00:00.007360']
+[2025-06-30 09:13:22,079 - INFO] - ---------------------------body---------------------------
+[2025-06-30 09:13:22,079 - INFO] - {
+  "count": 1,
+  "min": 2,
+  "max": 2,
+  "avg": 2.0
+}
+[2025-06-30 09:13:22,079 - INFO] - ----------------------------------------------------------
+
+
+

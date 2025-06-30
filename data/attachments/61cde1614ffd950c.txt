@@ -1,0 +1,50 @@
+[2025-06-30 09:13:28,207 - INFO] - =====================    Request    =====================
+[2025-06-30 09:13:28,207 - INFO] - ENDPOINT: http://auth:8000/auth/register/
+[2025-06-30 09:13:28,207 - INFO] - curl -H 'Content-Length: 159' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=michael24&password=_%24%25vQ%40AOkCDOd_AE%5ElB9LCJzp3a%2864&password_repeat=_%24%25vQ%40AOkCDOd_AE%5ElB9LCJzp3a%2864&email=michaelbooker%40example.org' http://auth:8000/auth/register/
+[2025-06-30 09:13:28,207 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:27 GMT', 'server': 'uvicorn', 'content-length': '28', 'content-type': 'application/json'}
+[2025-06-30 09:13:28,207 - INFO] - 
+[2025-06-30 09:13:28,207 - INFO] - =====================    Response    =====================
+[2025-06-30 09:13:28,207 - INFO] - Status code: '201', elapsed_time='0:00:00.272192']
+[2025-06-30 09:13:28,207 - INFO] - ---------------------------body---------------------------
+[2025-06-30 09:13:28,208 - INFO] - {
+  "detail": "User registered"
+}
+[2025-06-30 09:13:28,208 - INFO] - ----------------------------------------------------------
+
+
+
+[2025-06-30 09:13:28,561 - INFO] - =====================    Request    =====================
+[2025-06-30 09:13:28,561 - INFO] - ENDPOINT: http://auth:8000/auth/login/
+[2025-06-30 09:13:28,561 - INFO] - curl -H 'Content-Length: 68' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=michael24&password=_%24%25vQ%40AOkCDOd_AE%5ElB9LCJzp3a%2864' http://auth:8000/auth/login/
+[2025-06-30 09:13:28,561 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:28 GMT', 'server': 'uvicorn', 'content-length': '511', 'content-type': 'application/json'}
+[2025-06-30 09:13:28,561 - INFO] - 
+[2025-06-30 09:13:28,561 - INFO] - =====================    Response    =====================
+[2025-06-30 09:13:28,562 - INFO] - Status code: '200', elapsed_time='0:00:00.312675']
+[2025-06-30 09:13:28,562 - INFO] - ---------------------------body---------------------------
+[2025-06-30 09:13:28,562 - INFO] - {
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE1LCJ1c2VybmFtZSI6Im1pY2hhZWwyNCIsImV4cCI6MTc1MTI4MjAwOCwiaWF0IjoxNzUxMjc0ODA4fQ.NEGAjz66XluSih8hjhh3k_0JPDsStaMEbV2-sMNMR0sq_AlCs6h-xyMbZC-7I50NxW6T8IQgIPVoIueJSkiiX3gSSOf3BKaLOBwFPlS8y5RsSSwg0qta5-jR7HAwM7LquQbJaEwWuASGb7dkX47u4SFkPVpXs6OmTE229BWwJvS8m3iN2ytITTiqX380AOF9L1g4UoEDO8_j8G1LvO-Wbicss55NQ606R_SU0Qise6REgAgGt0mNrtpkZM1c37f0vAjpilH1iZ595poRGStpiEI0wO68hEv-FyJpIEFm7j-qASf9TRGFD3V02deWzsVDeVmAiJ8lgRKZBLlZw3FnFA",
+  "token_type": "Bearer"
+}
+[2025-06-30 09:13:28,562 - INFO] - ----------------------------------------------------------
+
+
+
+[2025-06-30 09:13:28,574 - INFO] - =====================    Request    =====================
+[2025-06-30 09:13:28,574 - INFO] - ENDPOINT: http://university:8000/groups/
+[2025-06-30 09:13:28,574 - INFO] - curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE1LCJ1c2VybmFtZSI6Im1pY2hhZWwyNCIsImV4cCI6MTc1MTI4MjAwOCwiaWF0IjoxNzUxMjc0ODA4fQ.NEGAjz66XluSih8hjhh3k_0JPDsStaMEbV2-sMNMR0sq_AlCs6h-xyMbZC-7I50NxW6T8IQgIPVoIueJSkiiX3gSSOf3BKaLOBwFPlS8y5RsSSwg0qta5-jR7HAwM7LquQbJaEwWuASGb7dkX47u4SFkPVpXs6OmTE229BWwJvS8m3iN2ytITTiqX380AOF9L1g4UoEDO8_j8G1LvO-Wbicss55NQ606R_SU0Qise6REgAgGt0mNrtpkZM1c37f0vAjpilH1iZ595poRGStpiEI0wO68hEv-FyJpIEFm7j-qASf9TRGFD3V02deWzsVDeVmAiJ8lgRKZBLlZw3FnFA' -H 'Content-Length: 24' -H 'Content-Type: application/json' -d '{"name": "interesting3"}' http://university:8000/groups/
+[2025-06-30 09:13:28,574 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:27 GMT', 'server': 'uvicorn', 'content-length': '30', 'content-type': 'application/json'}
+[2025-06-30 09:13:28,574 - INFO] - 
+[2025-06-30 09:13:28,574 - INFO] - =====================    Response    =====================
+[2025-06-30 09:13:28,574 - INFO] - Status code: '201', elapsed_time='0:00:00.010889']
+[2025-06-30 09:13:28,574 - INFO] - ---------------------------body---------------------------
+[2025-06-30 09:13:28,574 - INFO] - {
+  "name": "interesting3",
+  "id": 2
+}
+[2025-06-30 09:13:28,575 - INFO] - ----------------------------------------------------------
+
+
+

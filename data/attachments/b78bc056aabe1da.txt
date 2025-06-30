@@ -1,0 +1,46 @@
+[32mINFO    [0m Logger:logger.py:35 =====================    Request    =====================
+[32mINFO    [0m Logger:logger.py:35 ENDPOINT: http://auth:8000/auth/register/
+[32mINFO    [0m Logger:logger.py:35 curl -H 'Content-Length: 158' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=schultzwhitney&password=6cyB%25L4c%5E0986ruc5%28%5EHlfm%24OV4pJb&password_repeat=6cyB%25L4c%5E0986ruc5%28%5EHlfm%24OV4pJb&email=jason45%40example.net' http://auth:8000/auth/register/
+[32mINFO    [0m Logger:logger.py:35 Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:28 GMT', 'server': 'uvicorn', 'content-length': '28', 'content-type': 'application/json'}
+[32mINFO    [0m Logger:logger.py:35 
+[32mINFO    [0m Logger:logger.py:35 =====================    Response    =====================
+[32mINFO    [0m Logger:logger.py:35 Status code: '201', elapsed_time='0:00:00.273120']
+[32mINFO    [0m Logger:logger.py:35 ---------------------------body---------------------------
+[32mINFO    [0m Logger:logger.py:35 {
+  "detail": "User registered"
+}
+[32mINFO    [0m Logger:logger.py:35 ----------------------------------------------------------
+
+
+
+[32mINFO    [0m Logger:logger.py:35 =====================    Request    =====================
+[32mINFO    [0m Logger:logger.py:35 ENDPOINT: http://auth:8000/auth/login/
+[32mINFO    [0m Logger:logger.py:35 curl -H 'Content-Length: 73' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=schultzwhitney&password=6cyB%25L4c%5E0986ruc5%28%5EHlfm%24OV4pJb' http://auth:8000/auth/login/
+[32mINFO    [0m Logger:logger.py:35 Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:28 GMT', 'server': 'uvicorn', 'content-length': '517', 'content-type': 'application/json'}
+[32mINFO    [0m Logger:logger.py:35 
+[32mINFO    [0m Logger:logger.py:35 =====================    Response    =====================
+[32mINFO    [0m Logger:logger.py:35 Status code: '200', elapsed_time='0:00:00.312670']
+[32mINFO    [0m Logger:logger.py:35 ---------------------------body---------------------------
+[32mINFO    [0m Logger:logger.py:35 {
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2LCJ1c2VybmFtZSI6InNjaHVsdHp3aGl0bmV5IiwiZXhwIjoxNzUxMjgyMDA5LCJpYXQiOjE3NTEyNzQ4MDl9.MOLSKJKqAIkspMdVIO0wLYm905UhKab8cHOvwcfJdgdBtmxQuLSFoAVJmc0fNMQpUGHyXQj4OY-bYLL6ZN2rkOMtkuhXDOAxW1G4YeL4Bsf1L5NMh23MO7z5K8D-9QpN_UcrmX6KZZhwEOFrZVdxuLf0oyP3uVC39W7LVxpXMLLlqBWl4YwVTQh1zh9HNO1TBbcAxiBn8PGNxFgvG-HQka9jJWw0pCQLRIA97pNzI0RfXZbr0p0rRa1N9pnX25qRSBKLSS4S204bcb7BKCP3NfI0nAVi9H38GSfhi0QixOiXklrNRxquLtuMBTZgGip4MVn1cjpjv3omKyDxSDRZxg",
+  "token_type": "Bearer"
+}
+[32mINFO    [0m Logger:logger.py:35 ----------------------------------------------------------
+[32mINFO    [0m Logger:logger.py:35 =====================    Request    =====================
+[32mINFO    [0m Logger:logger.py:35 ENDPOINT: http://university:8000/teachers/
+[32mINFO    [0m Logger:logger.py:35 curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjE2LCJ1c2VybmFtZSI6InNjaHVsdHp3aGl0bmV5IiwiZXhwIjoxNzUxMjgyMDA5LCJpYXQiOjE3NTEyNzQ4MDl9.MOLSKJKqAIkspMdVIO0wLYm905UhKab8cHOvwcfJdgdBtmxQuLSFoAVJmc0fNMQpUGHyXQj4OY-bYLL6ZN2rkOMtkuhXDOAxW1G4YeL4Bsf1L5NMh23MO7z5K8D-9QpN_UcrmX6KZZhwEOFrZVdxuLf0oyP3uVC39W7LVxpXMLLlqBWl4YwVTQh1zh9HNO1TBbcAxiBn8PGNxFgvG-HQka9jJWw0pCQLRIA97pNzI0RfXZbr0p0rRa1N9pnX25qRSBKLSS4S204bcb7BKCP3NfI0nAVi9H38GSfhi0QixOiXklrNRxquLtuMBTZgGip4MVn1cjpjv3omKyDxSDRZxg' -H 'Content-Length: 69' -H 'Content-Type: application/json' -d '{"first_name": "Robert", "last_name": "Fowler", "subject": "Biology"}' http://university:8000/teachers/
+[32mINFO    [0m Logger:logger.py:35 Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:28 GMT', 'server': 'uvicorn', 'content-length': '71', 'content-type': 'application/json'}
+[32mINFO    [0m Logger:logger.py:35 
+[32mINFO    [0m Logger:logger.py:35 =====================    Response    =====================
+[32mINFO    [0m Logger:logger.py:35 Status code: '201', elapsed_time='0:00:00.008823']
+[32mINFO    [0m Logger:logger.py:35 ---------------------------body---------------------------
+[32mINFO    [0m Logger:logger.py:35 {
+  "first_name": "Robert",
+  "last_name": "Fowler",
+  "subject": "Biology",
+  "id": 2
+}
+[32mINFO    [0m Logger:logger.py:35 ----------------------------------------------------------

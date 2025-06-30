@@ -1,0 +1,59 @@
+[2025-06-30 09:13:31,773 - INFO] - =====================    Request    =====================
+[2025-06-30 09:13:31,773 - INFO] - ENDPOINT: http://auth:8000/auth/register/
+[2025-06-30 09:13:31,773 - INFO] - curl -H 'Content-Length: 165' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=christyconner&password=pz6GMJfS%25rIUI03YT8%2BnYNzd%2B%29%23%28EQ&password_repeat=pz6GMJfS%25rIUI03YT8%2BnYNzd%2B%29%23%28EQ&email=baileykevin%40example.org' http://auth:8000/auth/register/
+[2025-06-30 09:13:31,773 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:31 GMT', 'server': 'uvicorn', 'content-length': '28', 'content-type': 'application/json'}
+[2025-06-30 09:13:31,773 - INFO] - 
+[2025-06-30 09:13:31,773 - INFO] - =====================    Response    =====================
+[2025-06-30 09:13:31,773 - INFO] - Status code: '201', elapsed_time='0:00:00.272247']
+[2025-06-30 09:13:31,773 - INFO] - ---------------------------body---------------------------
+[2025-06-30 09:13:31,773 - INFO] - {
+  "detail": "User registered"
+}
+[2025-06-30 09:13:31,773 - INFO] - ----------------------------------------------------------
+
+
+
+[2025-06-30 09:13:32,126 - INFO] - =====================    Request    =====================
+[2025-06-30 09:13:32,126 - INFO] - ENDPOINT: http://auth:8000/auth/login/
+[2025-06-30 09:13:32,126 - INFO] - curl -H 'Content-Length: 74' -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=christyconner&password=pz6GMJfS%25rIUI03YT8%2BnYNzd%2B%29%23%28EQ' http://auth:8000/auth/login/
+[2025-06-30 09:13:32,126 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:31 GMT', 'server': 'uvicorn', 'content-length': '516', 'content-type': 'application/json'}
+[2025-06-30 09:13:32,126 - INFO] - 
+[2025-06-30 09:13:32,126 - INFO] - =====================    Response    =====================
+[2025-06-30 09:13:32,127 - INFO] - Status code: '200', elapsed_time='0:00:00.312085']
+[2025-06-30 09:13:32,127 - INFO] - ---------------------------body---------------------------
+[2025-06-30 09:13:32,127 - INFO] - {
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJ1c2VybmFtZSI6ImNocmlzdHljb25uZXIiLCJleHAiOjE3NTEyODIwMTIsImlhdCI6MTc1MTI3NDgxMn0.QoWEQ0HQBdvYCzlwNhsnboj04S0Grpv5BV4v_9cbg5tHTfpOn2eP3zpbpjdJSaX8GPOXJ6tSHfmep4ccKsYUNucprg-CnJWKG4sY_0wvWsCSM8GFcVUslfmPdUKTv_BVEw_bKhNkqA5VyMpZokr0RD1WYrzNKFFezqHcIe2D2fFyc5C7w4f2Jzc1DZyJrkOlqb1Yacfl53EodD8hIoWl1g2nWXpVdy6-7sbrLBP08slBJNt43zi9lb7xKLp2E4DMERRZDG8NfuEPLVSY2R_JyTrHv7xQ5IBpxjzHMY7i5FwrfOHbGl2vUT1NLKVd30Jpl5HWVsz15S9CudzDIhvnRw",
+  "token_type": "Bearer"
+}
+[2025-06-30 09:13:32,127 - INFO] - ----------------------------------------------------------
+
+
+
+[2025-06-30 09:13:32,135 - INFO] - =====================    Request    =====================
+[2025-06-30 09:13:32,135 - INFO] - ENDPOINT: http://university:8000/groups/
+[2025-06-30 09:13:32,135 - INFO] - curl -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIwLCJ1c2VybmFtZSI6ImNocmlzdHljb25uZXIiLCJleHAiOjE3NTEyODIwMTIsImlhdCI6MTc1MTI3NDgxMn0.QoWEQ0HQBdvYCzlwNhsnboj04S0Grpv5BV4v_9cbg5tHTfpOn2eP3zpbpjdJSaX8GPOXJ6tSHfmep4ccKsYUNucprg-CnJWKG4sY_0wvWsCSM8GFcVUslfmPdUKTv_BVEw_bKhNkqA5VyMpZokr0RD1WYrzNKFFezqHcIe2D2fFyc5C7w4f2Jzc1DZyJrkOlqb1Yacfl53EodD8hIoWl1g2nWXpVdy6-7sbrLBP08slBJNt43zi9lb7xKLp2E4DMERRZDG8NfuEPLVSY2R_JyTrHv7xQ5IBpxjzHMY7i5FwrfOHbGl2vUT1NLKVd30Jpl5HWVsz15S9CudzDIhvnRw' -H 'Content-Length: 15' -H 'Content-Type: application/json' -d '{"name": 12342}' http://university:8000/groups/
+[2025-06-30 09:13:32,135 - INFO] - Headers request: 
+{'date': 'Mon, 30 Jun 2025 09:13:31 GMT', 'server': 'uvicorn', 'content-length': '110', 'content-type': 'application/json'}
+[2025-06-30 09:13:32,136 - INFO] - 
+[2025-06-30 09:13:32,136 - INFO] - =====================    Response    =====================
+[2025-06-30 09:13:32,136 - INFO] - Status code: '422', elapsed_time='0:00:00.007187']
+[2025-06-30 09:13:32,136 - INFO] - ---------------------------body---------------------------
+[2025-06-30 09:13:32,136 - INFO] - {
+  "detail": [
+    {
+      "type": "string_type",
+      "loc": [
+        "body",
+        "name"
+      ],
+      "msg": "Input should be a valid string",
+      "input": 12342
+    }
+  ]
+}
+[2025-06-30 09:13:32,136 - INFO] - ----------------------------------------------------------
+
+
+
